@@ -36,3 +36,33 @@ class Client(models.Model):
     email = models.EmailField(max_length=255)
     phone_number = models.CharField(max_length=255)
     address_id = models.ForeignKey(Address, on_delete=models.CASCADE)
+
+class Order(models.Model):
+    id = models.IntegerField(default = 0, primary_key=True)
+    name = models.TextField(max_length=255)
+    status = models.BooleanField(default=False)
+    order_date = models.DateTimeField(auto_now_add=True)
+    delivery_date = models.DateTimeField(auto_now_add=True)
+    attendant = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    notes = models.TextField(max_length=255)
+
+    def __str__(self):
+        self.orders_id
+
+class Product(models.Model):
+    id = models.IntegerField(default=0, primary_key=True)
+    name = models.CharField(max_length=255)
+    description = models.TextField(max_length=255)
+    model = models.TextField(max_length=255)
+    stock = models.IntegerField()
+    price = models.FloatField()
+    serial_num = models.TextField(max_length=255)
+
+class Order_product(object):
+    id = models.IntegerField(default = 0, primary_key=True)
+    order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
+    authorized_id = models.IntegerField(default = 0, primary_key=True)
+    pickup_date = models.DateTimeField(auto_now_add=True)
+
+
