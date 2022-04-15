@@ -37,8 +37,44 @@ class Client(models.Model):
     phone_number = models.CharField(max_length=255)
     address_id = models.ForeignKey(Address, on_delete=models.CASCADE)
 
+
+class Job(models.Model):
+    title = models.TextField(max_length=100)
+    min_salary = models.FloatField(default=0.0)
+    max_salary = models.FloatField(default=0.0)
+
+
+class Department(models.Model):
+    departments_list = [
+        ("RH", "Recursos Humanos"),
+        ("ST", "Soporte Técnico"),
+        ("MT", "Mercadotecnia"),
+        ("EB", "Ensamblaje"),
+        ("DT", "Distribución"),
+        ("AL", "Almacén"),
+        ("FN", "Finanzas"),
+    ]
+    name = models.TextField(max_length=100, choices=departments_list, default="RH")
+    description = models.TextField(max_length=255)
+
+
+class Employee(models.Model):
+    sexes = [("M", "Masculino"), ("F", "Femenino"), ("O", "Otro")]
+
+    first_name = models.TextField(max_length=100)
+    last_name = models.TextField(max_length=100)
+    sex = models.CharField(max_length=1, choices=sexes, default="O")
+    email = models.EmailField(max_length=200)
+    birthdate = models.DateField()
+    hire_date = models.DateField()
+    monthly_salary = models.FloatField(default=0.0)
+    bonus = models.FloatField(default=0.0)
+    contract_id = models.IntegerField(max_length=10)
+    department_id = models.ForeignKey(Department, on_delete=models.CASCADE)
+
+
 class Order(models.Model):
-    id = models.IntegerField(default = 0, primary_key=True)
+    id = models.IntegerField(default=0, primary_key=True)
     name = models.TextField(max_length=255)
     status = models.BooleanField(default=False)
     order_date = models.DateTimeField(auto_now_add=True)
@@ -49,6 +85,7 @@ class Order(models.Model):
     def __str__(self):
         self.orders_id
 
+
 class Product(models.Model):
     id = models.IntegerField(default=0, primary_key=True)
     name = models.CharField(max_length=255)
@@ -58,50 +95,11 @@ class Product(models.Model):
     price = models.FloatField()
     serial_num = models.TextField(max_length=255)
 
+
 class Order_product(object):
-    id = models.IntegerField(default = 0, primary_key=True)
+    id = models.IntegerField(default=0, primary_key=True)
     order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
     product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
-    authorized_id = models.IntegerField(default = 0, primary_key=True)
+    authorized_id = models.IntegerField(default=0, primary_key=True)
     pickup_date = models.DateTimeField(auto_now_add=True)
-
-
-
-class Job(models.Model):
-    title = models.TextField(max_length=100 )
-    min_salary = models.FloatField(default = 0.0)
-    max_salary = models.FloatField(default = 0.0)
-    
-
-class Department(models.Model):
-    departments_list = [
-        ("RH", "Recursos Humanos"),
-        ("ST", "Soporte Técnico"),
-        ("MT", "Mercadotecnia"),
-        ("EB", "Ensamblaje"),
-        ("DT", "Distribución"),
-        ("AL", "Almacén"),
-        ("FN", "Finanzas")
-    ]
-    name = models.TextField(max_length=100, choices=departments_list, default = "RH")
-    description = models.TextField(max_length=255)
-
-
-class Employee(models.Models):
-    sexes=[
-        ("M","Masculino"),
-        ("F","Femenino"),
-        ("O","Otro")
-    ]
-
-    first_name = models.TextField(max_length=100)
-    last_name = models.TextField(max_length=100)
-    sex = models.CharField(max_length=1, choices=sexes,default="O")
-    email = models.EmailField(max_length=200)
-    birthdate = models.DateField()
-    hire_date = models.DateField()
-    monthly_salary  = models.FloatField(default=0.0)
-    bonus = models.FloatField(default=0.0)
-    contract_id = models.IntegerField(max_length = 10)
-    department_id = models.ForeignKey(Department,on_delete=models.CASCADE)  
-    job_id = models.ForeignKey(Job,on_delete=models.CASCADE)
+    job_id = models.ForeignKey(Job, on_delete=models.CASCADE)

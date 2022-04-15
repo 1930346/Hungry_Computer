@@ -11,3 +11,12 @@ def index(request):
     print(registro)
     context = {"registro": registro}
     return render(request, "index.html", context)
+
+
+def simple_form(request):
+    if request.method == "POST":
+        description = request.POST.get("description")
+        inputO = request.POST.get("inputO")
+        print(description)
+
+    return render(request, "simple_form.html")

@@ -1,0 +1,17 @@
+<form action="" method="post">
+  {% csrf_token %}
+
+  <textarea
+    name="description"
+    rows="4"
+    cols="70"
+    class="form-control"
+    placeholder="Enter the situation description"
+  ></textarea>
+  <select id="inputO_type" name="inputO" class="form-control">
+    <option>Positive</option>
+    <option>Negative</option>
+  </select>
+  {% comment %} sumbit {% endcomment %}
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
