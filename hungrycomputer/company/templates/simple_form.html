@@ -15,3 +15,7 @@
   {% comment %} sumbit {% endcomment %}
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+<form action="{% url 'delete_simple_form' 1 %}" method="post">
+  {% csrf_token %}
+  <input type="submit" value="Delete example id=1" />
+</form>

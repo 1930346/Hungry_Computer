@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.http import HttpResponse
@@ -17,6 +17,12 @@ def simple_form(request):
     if request.method == "POST":
         description = request.POST.get("description")
         inputO = request.POST.get("inputO")
-        print(description)
+        print(description, inputO)
 
     return render(request, "simple_form.html")
+
+
+def delete_simple_form_id(request, id):
+    if request.method == "POST":
+        print(f"example of deleting some id: {id}")
+    return redirect(simple_form)
