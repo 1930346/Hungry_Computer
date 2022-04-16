@@ -1,47 +1,106 @@
+from models import *
+
 def fill():
-    a = Addresses(
-        street="Paloma Real",
-        interior_number=None,
-        exterior_number=2927,
-        city="Victoria",
-        state="Tamaulipas",
-        postal_code=87130,
-    )
-    a.save()
 
-    o = Order(
-        id=1,
-        name="orden",
-        status=False,
-        attendant=1,
-        notes="nota",
+    client = Client(
+        first_name= "Juan",
+        last_name= "Perez",
+        email= "1930436@upv.edu.mx",
+        phone_number= 123456789,
     )
-    o.save()
+    client.save()
 
-    p = Product(
-        id=1,
-        name="memoria",
-        description="memoria descricion",
-        model="M1500",
-        stock=50,
-        price=466.50,
-        serial_num="ES23456",
+    address = Address(
+        client_id = client, #this is a client
+        street= "Paloma Real",
+        interior_number= None,
+        exterior_number= 2927,
+        city= "Victoria",
+        state= "Tamaulipas",
+        postal_code= 87130,
     )
-    p.save()
+    address.save()
 
-    op = Order_product(
-        id=1,
-        order_id=1,
-        product_id=1,
-        authorized_id=1,
+    department = Department(
+        name= "RH",
+        description= "Recursos Humanos",
     )
-    op.save()
+    department.save()
 
-    c = Client(
-        first_name="Juan",
-        last_name="Perez",
-        phone_number=123456789,
-        email="1930436@upv.edu.mx",
-        address_id=a,
+    job = Job(
+        title= "Programador",
+        min_salary= 5000,
+        max_salary= 20000,
     )
-    c.save()
+    job.save()
+
+    employee = Employee(
+        first_name= "Elsan",
+        last_name= "Cudo",
+        sex = "M",
+        email = "1930346@upv.edu.mx",
+        date_of_birth = "2000-01-01",
+        hire_date = "2022-01-02",
+        monthly_salary = 15500.00,
+        bonus = 0.15,
+        contract_id = 1,
+        department_id = department,
+        job_id = job
+    )
+    employee.save()
+
+    order = Order(
+        name= "orden_numero1",
+        status= True,
+        order_date = "2020-01-01",
+        delivery = "2020-01-02",
+        attendant= 1,
+        notes= "nota",
+    )
+    order.save()
+
+    product = Product(
+        # id= 1,
+        name= "memoria",
+        description= "memoria descricion",
+        brand = "Asus",
+        model= "M1500",
+        stock= 50,
+        price= 466.50,
+        serial_num= "ES23456",
+    )
+    product.save()
+
+    order_product = Order_product(
+        # id= 1,
+        order_id= order,
+        product_id= product,
+        authorized_id= employee,
+    )
+    order_product.save()
+
+    assembly_order = Assembly_order(
+        attendant= employee,
+        finish_date= "2020-01-01",
+        description= "Detalles de una pc",
+        notes= "El usuario le tiró agua lol",
+        status= True,
+        client_id= client,
+    ) 
+    assembly_order.save()
+
+    good = Good(
+        description = "Muebles",
+        value = 12500.00,
+        quantity = 10,
+        is_active = True
+    )
+    good.save()
+
+    problem = Problem(
+        type = "1",
+        employee_id = 1, #Este campo no tiene una relación de llave foránea
+        details = "No funciona la pc",
+        problem_date = "2022-04-15",
+    )
+    problem.save()
