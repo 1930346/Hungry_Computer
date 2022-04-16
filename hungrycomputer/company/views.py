@@ -70,8 +70,8 @@ def update_product(request):
         model = request.POST.get("ModeloProd")
         print(name, price, stock)
 
-        product = Product.objects.get(id=p_id)
-        if product:
+        try:
+            product = Product.objects.get(id=p_id)
             product.name = name
             product.price = price
             product.stock = stock
@@ -80,6 +80,8 @@ def update_product(request):
             product.brand = brand
             product.model = model
             product.save()
+        except Product.DoesNotExist:
+            print("El producto no existe")
     return redirect(almacen_view)
 
 
