@@ -90,3 +90,15 @@ def delete_product(request, id):
         product = Product.objects.get(id=id)
         product.delete()
     return redirect(almacen_view)
+
+
+#Soporte Formulario
+def soporte_form(request):
+    print(Problem.objects.all())
+    if request.method == "POST":
+        id = request.POST.get("id")
+        problema = request.POST.get("problema")
+        descripcion = request.POST.get("descripcion")
+        print(id, problema, descripcion)
+        problem = Problem(employee_id= id, type= problema, description= descripcion)
+    return render(request, "fromEmpleado.html")
