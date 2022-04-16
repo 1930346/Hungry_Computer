@@ -36,12 +36,12 @@
                   Departamentos
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="almacen.html">Almacen</a></li>
-                  <li><a class="dropdown-item" href="distribuicion.html">Distribución</a></li>
-                  <li><a class="dropdown-item" href="ensamblaje.html">Ensamblaje</a></li>
-                  <li><a class="dropdown-item" href="finanzas.html">Finanzas</a></li>
-                  <li><a class="dropdown-item" href="#">Mercadotecnia</a></li>
-                  <li><a class="dropdown-item" href="#">Recursos Humanos</a></li>
+                  <li><a class="dropdown-item" href="almacen">Almacen</a></li>
+                  <li><a class="dropdown-item" href="distribuicion">Distribución</a></li>
+                  <li><a class="dropdown-item" href="ensamblaje">Ensamblaje</a></li>
+                  <li><a class="dropdown-item" href="finanzas">Finanzas</a></li>
+                  <li><a class="dropdown-item" href="mercadotecnia">Mercadotecnia</a></li>
+                  <li><a class="dropdown-item" href="recursos humanos">Recursos Humanos</a></li>
                   <li><a class="dropdown-item" href="soporte.html">Soporte</a></li>
                   <!--<li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="#">Something else here</a></li>-->
@@ -98,8 +98,9 @@
                     <td>{{employee.monthly_salary}}</td>
                     <td>{{employee.bonus}}</td>
                     <td>{{ employee.bonus | plus:employee.monthly_salary }}</td>
-                    <td><button type="button" class="mt-0 mx-0 btn btn-success" data-bs-toggle="modal" data-bs-target="#miModal"><i class="fa fa-pencil" aria-hidden="true"></i> | Editar</button>
-
+                    <td><button type="button" class="mt-0 mx-0 btn btn-success" data-bs-toggle="modal" data-bs-target="#miModal"><i class="fa fa-pencil" aria-hidden="true"></i>  Editar</button>
+                      <form action ="{%url 'update_salary' %}" method="post">
+                      {% csrf_token %}
                       <div class="modal fade" id="miModal" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle">
                         <div class="modal-dialog">
                           <div class="modal-content">
@@ -109,43 +110,46 @@
                                 <span aria-hidden="true">&times;</span>
                               </button>
                             </div>
+
                             <div class="modal-body">
                               <div class="form-group">
                                   <label for="exampleInputNombre">Nombre</label>
-                                  <input  class="form-control" id="exampleInputNombre" aria-describedby="NombreHelp" placeholder="Nombre del Empleado"disabled>
+                                  <input  class="form-control" id="exampleInputNombre" name="inputName" aria-describedby="NombreHelp" placeholder="Nombre del Empleado"disabled>
                                 </div>
                                 <div class="form-group">
                                   <label for="exampleInputID">ID</label>
-                                  <input  class="form-control" id="exampleInputID" placeholder="ID del Empleado" disabled>
+                                  <input  class="form-control" id="exampleInputID" name="InputID" placeholder="ID del Empleado">
                                 </div>
                                 <div class="form-group">
                                   <label for="exampleInputPuesto">Puesto</label>
-                                  <input  class="form-control" id="exampleInputPuesto" placeholder="Puesto del Empleado"disabled>
+                                  <input  class="form-control" id="exampleInputPuesto" name="InputPuesto" placeholder="Puesto del Empleado">
                                 </div>
                                 <div class="form-group">
                                   <label for="exampleInputSueldo">Sueldo Base</label>
-                                  <input  class="form-control" id="exampleInputSueldo" placeholder="Sueldo del Empleado">
+                                  <input  class="form-control" id="exampleInputSueldo" name="InputSueldo" placeholder="Sueldo del Empleado">
                                 </div>
                                 <div class="form-group">
                                   <label for="exampleInputDescuento">Descuentos</label>
-                                  <input  class="form-control" id="exampleInputDescuento" placeholder="ej. 15%">
+                                  <input  class="form-control" id="exampleInputDescuento" name="InputDescuento" placeholder="ej. 15%">
                                 </div>
                                 <div class="form-group">
                                   <label for="exampleInputBonos">Bonos</label>
-                                  <input  class="form-control" id="exampleInputBonos" placeholder="ej. 300">
+                                  <input  class="form-control" id="exampleInputBonos" name="InputBonos"placeholder="ej. 300">
                                 </div>
                                 <div class="form-group">
                                   <label for="exampleInputNota">Notas(opcional)</label>
-                                  <input  class="form-control" id="exampleInputNota" placeholder="Descripción del cambio">
+                                  <input  class="form-control" id="exampleInputNota" name="InputNota" placeholder="Descripción del cambio">
                                 </div>
                             </div>
                             <div class="modal-footer">
-                              <button type="button" class="btn btn-success">Confirmar</button>
+                              <button type="submit" class="btn btn-success" >Confirmar</button>
                               <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                             </div>
                             </div>
                           </div>
-                        </div></td>
+                        </div>
+                      </form>
+                    </td>
                   </tr>
                   {%endfor%}
                 </tbody>

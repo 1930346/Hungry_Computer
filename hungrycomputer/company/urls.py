@@ -15,7 +15,9 @@ urlpatterns = [
     path("formulario_soporte", views.soporte_form, name="soporte_form"),
     #finanzas
     path("finanzas", views.finanzas_view, name="finanzas"),
+    path("update_salary",views.update_salary, name="update_salary"),
     #Recursos humanos
     path("recursos_humanos", views.recursos_humanos_view, name="recursos_humanos"),
+
 
 ]
