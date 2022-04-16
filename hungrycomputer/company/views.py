@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.http import HttpResponse
-from company.models import Problem, Product
+from company.models import Problem, Product, Good, Employee,Department
 
 
 def index(request):
@@ -102,3 +102,11 @@ def soporte_form(request):
         print(id, problema, descripcion)
         problem = Problem(employee_id= id, type= problema, description= descripcion)
     return render(request, "fromEmpleado.html")
+
+#Finanzas
+def finanzas_view(request):
+    context = {"goods": Good.objects.all(),
+                "employees": Employee.objects.all(),
+                "departments": Department.objects.all()}
+
+    return render(request, "finanzas.html", context)

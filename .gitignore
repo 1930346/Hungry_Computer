@@ -1,6 +1,6 @@
 #Python venv
 django_hc/
-
+django_hs/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
