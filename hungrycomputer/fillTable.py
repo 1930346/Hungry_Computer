@@ -1,4 +1,4 @@
-from models import *
+from company.models import *
 
 def fill():
 
@@ -53,8 +53,8 @@ def fill():
         name= "orden_numero1",
         status= True,
         order_date = "2020-01-01",
-        delivery = "2020-01-02",
-        attendant= 1,
+        delivery_date = "2020-01-02",
+        attendant= employee,
         notes= "nota",
     )
     order.save()
@@ -75,7 +75,8 @@ def fill():
         # id= 1,
         order_id= order,
         product_id= product,
-        authorized_id= employee,
+        authorized_by= employee,
+        pickup_date= "2022-04-15",
     )
     order_product.save()
 
@@ -100,7 +101,7 @@ def fill():
     problem = Problem(
         type = "1",
         employee_id = 1, #Este campo no tiene una relación de llave foránea
-        details = "No funciona la pc",
-        problem_date = "2022-04-15",
+        description = "No funciona la pc",
+        date = "2022-04-15",
     )
     problem.save()
