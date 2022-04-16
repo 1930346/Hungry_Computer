@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.http import HttpResponse
-from company.models import Problem, Product, Good, Employee,Department
+from django.db.models.functions import Concat
+from django.db.models import Value
+from company.models import *
 
 
 def index(request):
@@ -110,3 +112,12 @@ def finanzas_view(request):
                 "departments": Department.objects.all()}
 
     return render(request, "finanzas.html", context)
+
+
+#Recursos Humanos
+def recursos_humanos_view(request):
+    # context = {"empleados": Employee.objects.all()}
+    # object_list = ModelClass.objects.all().annotate(difference=F('var1') - F('var2'))
+    context = Employee.objects.all().annotate(name=Concat(Employee('first_name'), Value(''), Employee('last_name')))
+    print(context)
+    return render(request, "recursos humanos.html", context) 
