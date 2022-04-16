@@ -105,6 +105,13 @@ def soporte_form(request):
         problem = Problem(employee_id= id, type= problema, description= descripcion)
     return render(request, "fromEmpleado.html")
 
+#Finanzas
+def finanzas_view(request):
+    context = {"goods": Good.objects.all(),
+                "employees": Employee.objects.all(),
+                "departments": Department.objects.all()}
+
+    return render(request, "finanzas.html", context)
 
 
 #Recursos Humanos
