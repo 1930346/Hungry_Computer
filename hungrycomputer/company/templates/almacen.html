@@ -163,7 +163,7 @@
                       data-bs-target="#ModalEdicionProducto"
                     >
                       <i class="fa fa-pencil"></i>
-                      Editar
+                      | Editar
                     </button>
                     <form
                       style="margin-left: 5px"
@@ -172,8 +172,8 @@
                     >
                       {% csrf_token %}
                       <button type="submit" class="btn btn-danger">
-                        <i class="fa fa-trash"></i>
-                        | Eliminar
+                        <i class="fa fa-trash" aria-hidden="true"></i> |
+                        Eliminar
                       </button>
                     </form>
                   </div>

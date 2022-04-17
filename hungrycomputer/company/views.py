@@ -97,8 +97,135 @@ def delete_product(request, id):
 
 # distribucion
 def distribucion_view(request):
-    context = {"Orders": Order.objects.all(), "Order Details": Order_product.objects.all()}
+    context = {"orders": Order.objects.all(), "order_products": Order_product.objects.all()}
+    print(context)
     return render(request, "distribucion.html", context)
+
+def add_order(request):
+    if request.method == "POST":
+        name = request.POST.get("nombre")
+        status = False
+        delivery_date = request.POST.get("fechaEntrega")
+        attendant_id = request.POST.get("empleado")
+        notes = request.POST.get("notas")
+        
+        print(Employee.objects.all())
+        print(name, status, delivery_date, attendant_id, notes)
+        attendant = Employee.objects.get(id=attendant_id)
+        
+        order = Order(
+            name=name,
+            status=status,
+            delivery_date=delivery_date,
+            attendant=attendant,
+            notes=notes,
+        )
+        order.save()
+        
+    return redirect(distribucion_view)
+
+def update_order(request):
+    if request.method == "POST":
+        o_id = request.POST.get("id")
+        name = request.POST.get("nombre")
+        status = True if request.POST.get("status") == "on" else False
+        delivery_date = request.POST.get("fechaEntrega")
+        attendant_id = request.POST.get("empleado")
+        notes = request.POST.get("notas")
+        print(name, status, delivery_date, attendant_id, notes)
+
+        # check for none in the fields
+        if o_id is None or name is None or delivery_date is None or attendant_id is None or notes is None:
+            return redirect(distribucion_view)
+
+        try:
+            attendant = Employee.objects.get(id=attendant_id)
+            order = Order.objects.get(id=o_id)
+            order.name = name
+            order.status = status
+            order.delivery_date = delivery_date
+            order.attendant = attendant
+            order.notes = notes
+            order.save()
+        except Order.DoesNotExist:
+            print("El order no existe")
+        except Employee.DoesNotExist:
+            print("El empleado no existe")
+    return redirect(distribucion_view)
+
+def delete_order(request, id):
+    if request.method == "POST":
+        order = Order.objects.get(id=id)
+        order.delete()
+    return redirect(distribucion_view)
+
+def add_order_product(request):
+    if request.method == "POST":
+        order_id = request.POST.get("order_id")
+        product_id = request.POST.get("product_id")
+        authorized_by = request.POST.get("authorized_by")
+        pickup_date = request.POST.get("pickup_date")
+
+        # check for none in the fields
+        if order_id is None or product_id is None or authorized_by is None or pickup_date is None:
+            return redirect(distribucion_view)
+
+        try:
+            order = Order.objects.get(id=order_id)
+            product = Product.objects.get(id=product_id)
+            employee = Employee.objects.get(id=authorized_by)
+            order_product = Order_product(
+                order_id=order,
+                product_id=product,
+                authorized_by=employee,
+                pickup_date=pickup_date,
+            )
+            order_product.save()
+        except Order.DoesNotExist:
+            print("El order no existe")
+        except Product.DoesNotExist:
+            print("El producto no existe")
+        except Employee.DoesNotExist:
+            print("El empleado no existe")
+    return redirect(distribucion_view)
+
+def update_order_product(request):
+    if request.method == "POST":
+        op_id = request.POST.get("id")
+        order_id = request.POST.get("order_id")
+        product_id = request.POST.get("product_id")
+        authorized_by = request.POST.get("authorized_by")
+        pickup_date = request.POST.get("pickup_date")
+
+        # check for none in the fields
+        if op_id is None or order_id is None or product_id is None or authorized_by is None or pickup_date is None:
+            return redirect(distribucion_view)
+
+        try:
+            order = Order.objects.get(id=order_id)
+            product = Product.objects.get(id=product_id)
+            order_product = Order_product.objects.get(id=op_id)
+            employee = Employee.objects.get(id=authorized_by)
+            order_product.order_id = order
+            order_product.product_id = product
+            order_product.authorized_by = employee
+            order_product.pickup_date = pickup_date
+            order_product.save()
+        except Order.DoesNotExist:
+            print("El order no existe")
+        except Product.DoesNotExist:
+            print("El producto no existe")
+        except Order_product.DoesNotExist:
+            print("El order product no existe")
+        except Employee.DoesNotExist:
+            print("El empleado no existe")
+    return redirect(distribucion_view)
+
+def delete_order_product(request, id):
+    if request.method == "POST":
+        order_product = Order_product.objects.get(id=id)
+        order_product.delete()
+    return redirect(distribucion_view)
 
 #Soporte Formulario
 def soporte_form(request):

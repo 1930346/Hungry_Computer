@@ -13,6 +13,12 @@ urlpatterns = [
     path("delete_product/<int:id>", views.delete_product, name="delete_product"),
     #distribucion
     path("distribucion", views.distribucion_view, name="distribucion"),
+    path("add_order", views.add_order, name="add_order"),
+    path("update_order", views.update_order, name="update_order"),
+    path("delete_order/<int:id>", views.delete_order, name="delete_order"),
+    path("add_order_product", views.add_order_product, name="add_order_product"),
+    path("update_order_product", views.update_order_product, name="update_order_product"),
+    path("delete_order_product/<int:id>", views.delete_order_product, name="delete_order_product"),
     #Formulario Soporte
     path("formulario_soporte", views.soporte_form, name="soporte_form"),
     #finanzas
