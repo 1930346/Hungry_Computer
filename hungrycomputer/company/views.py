@@ -27,6 +27,13 @@ def delete_simple_form_id(request, id):
         print(f"example of deleting some id: {id}")
     return redirect(simple_form)
 
+#home
+def home_view(request):
+    return render(request,"home.html")
+
+#Mercadotecnia 
+def mercadotecnia_view(request):
+    return render(request,"mercadotecnia.html")
 
 # ALMACEN
 def almacen_view(request):

@@ -32,4 +32,8 @@ urlpatterns = [
     path("soporte", views.soporte_view, name="soporte"),
     path("delete_problem/<int:id>", views.delete_problem, name="delete_problem"),
     path("update_problem", views.update_problem, name="update_problem"),
+    #Home
+    path("home", views.home_view, name="home"),
+    #Mercadotecnia
+    path("mercadotecnia", views.mercadotecnia_view, name="mercadotecnia"),
 ]
