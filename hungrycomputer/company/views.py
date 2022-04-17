@@ -70,6 +70,10 @@ def update_product(request):
         model = request.POST.get("ModeloProd")
         print(name, price, stock)
 
+        # check for none in the fields
+        if p_id is None or name is None or price is None or stock is None or description is None or serial_num is None or brand is None or model is None:
+            return redirect(almacen_view)
+
         try:
             product = Product.objects.get(id=p_id)
             product.name = name
@@ -91,6 +95,10 @@ def delete_product(request, id):
         product.delete()
     return redirect(almacen_view)
 
+# distribucion
+def distribucion_view(request):
+    context = {"Orders": Order.objects.all(), "Order Details": Order_product.objects.all()}
+    return render(request, "distribucion.html", context)
 
 #Soporte Formulario
 def soporte_form(request):
