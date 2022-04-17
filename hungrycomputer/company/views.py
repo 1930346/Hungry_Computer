@@ -2,8 +2,6 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.http import HttpResponse
-from django.db.models.functions import Concat
-from django.db.models import Value
 from company.models import *
 
 
@@ -116,8 +114,43 @@ def finanzas_view(request):
 
 #Recursos Humanos
 def recursos_humanos_view(request):
-    # context = {"empleados": Employee.objects.all()}
-    # object_list = ModelClass.objects.all().annotate(difference=F('var1') - F('var2'))
-    context = Employee.objects.all().annotate(name=Concat(Employee('first_name'), Value(''), Employee('last_name')))
+    context = {"empleados": Employee.objects.all()}
     print(context)
     return render(request, "recursos humanos.html", context) 
+
+def delete_employee(request, id):
+    if request.method == "POST":
+        employee = Employee.objects.get(id=id)
+        employee.delete()
+    return redirect(recursos_humanos_view)
+
+def update_employee(request):
+    if request.method == "POST":
+        employee_id = request.POST.get("employee_id")
+        first_name = request.POST.get("first_name")
+        last_name = request.POST.get("last_name")
+        email = request.POST.get("email")
+        date_of_birth = request.POST.get("date_of_birth")
+        hire_date = request.POST.get("hire_date")
+        monthly_salary = request.POST.get("monthly_salary")
+        bonus = request.POST.get("bonus")
+        contract_id = request.POST.get("contract_id")
+        department_id = request.POST.get("department_id")
+        job_id = request.POST.get("job_id")
+        print(first_name, last_name, monthly_salary)
+        try:
+            employee = Employee.objects.get(id=employee_id)
+            employee.first_name = first_name
+            employee.last_name = last_name
+            employee.email = email
+            employee.date_of_birth = date_of_birth
+            employee.hire_date = hire_date
+            employee.monthly_salary = monthly_salary
+            employee.bonus = bonus
+            employee.contract_id = contract_id
+            employee.department_id = Department.objects.get(id=department_id)
+            employee.job_id = job_id = Job.objects.get(id=job_id)
+            employee.save()
+        except Employee.DoesNotExist:
+            print("El empleado no existe")
+    return redirect(recursos_humanos_view)

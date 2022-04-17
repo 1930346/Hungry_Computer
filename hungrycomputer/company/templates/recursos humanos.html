@@ -106,216 +106,357 @@
           </nav>
 
           <h1>Recursos Humanos</h1>
+          {%load custom_tags%}
           <hr />
           <table class="table">
             <thead class="table-primary">
               <tr>
                 <th scope="col">Id de Empleado</th>
                 <th scope="col">Nombre</th>
+                <th scope="col">Sex</th>
+                <th scope="col">Email</th>
                 <th scope="col">Departamento</th>
                 <th scope="col">Salario</th>
+                <th scope="col">Bonus</th>
                 <th scope="col">Fecha de contratación</th>
+                <th scope="col">Id de contrato</th>
                 <th scope="col">Acción</th>
               </tr>
             </thead>
             <tbody>
               {% for employee in empleados %}
               <tr>
-                {% comment %} <th scope="row">
-                  <img
-                    src="img/incono2.png"
-                    class="img"
-                    width="50"
-                    height="50"
-                  />
-                </th> {% endcomment %}
                 <td>{{ employee.id }}</td>
-                <td>{{ empleados.name }}</td>
+                <td>
+                  {{ employee.first_name | concat_names:employee.last_name }}
+                </td>
+                <td>{{ employee.get_sex_display}}</td>
+                <td>{{ employee.email}}</td>
                 <td>{{ employee.department_id.get_name_display }}</td>
-                <td>{{ employee.monthly_salary }} </td>
+                <td>{{ employee.monthly_salary }}</td>
+                <td>{{ employee.bonus }}</td>
                 <td>{{ employee.hire_date }}</td>
-
-                {% endfor %}
+                <td>{{ employee.contract_id }}</td>
                 <td>
-                  <button
-                    type="button"
-                    class="mt-0 mx-0 btn btn-secondary"
-                    data-bs-toggle="modal"
-                    data-bs-target="#miModal2"
-                  >
-                    <i class="fa fa-pencil" aria-hidden="true"></i> | Editar
-                  </button>
-
-                  <div
-                    class="modal fade"
-                    id="miModal"
-                    tabindex="-1"
-                    aria-hidden="true"
-                    aria-labelledby="modalTitle"
-                  >
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="modalTitle">
-                            Editar Información del empleado
-                          </h5>
-                          <button
-                            type="button"
-                            class="close"
-                            data-dismiss="modal"
-                            aria-label="Close"
-                          >
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-success">
-                            Confirmar
-                          </button>
-                          <button
-                            type="button"
-                            class="btn btn-danger"
-                            data-dismiss="modal"
-                          >
-                            Cancelar
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <button type="button" class="btn btn-danger">
-                    <i class="fa fa-trash" aria-hidden="true"></i> | Eliminar
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <img
-                    src="img/incono2.png"
-                    class="img"
-                    width="50"
-                    height="50"
-                  />
-                </th>
-                <td>Orlando Samuel Martínez Dorantes</td>
-                <td>Encargado del departamento de inventario</td>
-                <td>@fat</td>
-                <td>
-                  <button type="button" class="btn btn-info">
-                    <i class="fa fa-eye" aria-hidden="true"></i> | Ver
-                  </button>
-                  <button
-                    type="button"
-                    class="mt-0 mx-0 btn btn-secondary"
-                    data-bs-toggle="modal"
-                    data-bs-target="#miModal"
-                  >
-                    <i class="fa fa-pencil" aria-hidden="true"></i> | Editar
-                  </button>
-
-                  <button type="button" class="btn btn-danger">
-                    <i class="fa fa-trash" aria-hidden="true"></i> | Eliminar
-                  </button>
-                </td>
-              </tr>
-              {% comment %} Modales? {% endcomment %}
-              <div
-                class="modal fade"
-                id="miModal2"
-                tabindex="-1"
-                aria-hidden="true"
-                aria-labelledby="modalTitle"
-              >
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="modalTitle">Editar Sueldo</h5>
-                      <button
-                        type="button"
-                        class="close"
-                        data-dismiss="modal"
-                        aria-label="Close"
-                      >
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <div class="form-group">
-                        <label for="exampleInputNombre">Nombre</label>
-                        <input
-                          class="form-control"
-                          id="exampleInputNombre"
-                          aria-describedby="NombreHelp"
-                          placeholder="Nombre del Empleado"
-                          disabled
-                        />
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputID">Departamento</label>
-                        <input
-                          class="form-control"
-                          id="exampleInputID"
-                          placeholder="ID del Empleado"
-                          disabled
-                        />
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputPuesto">Id</label>
-                        <input
-                          class="form-control"
-                          id="exampleInputPuesto"
-                          placeholder="Puesto del Empleado"
-                          disabled
-                        />
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputSueldo">Sueldo Base</label>
-                        <input
-                          class="form-control"
-                          id="exampleInputSueldo"
-                          placeholder="Sueldo del Empleado"
-                        />
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputDescuento">Descuentos</label>
-                        <input
-                          class="form-control"
-                          id="exampleInputDescuento"
-                          placeholder="ej. 15%"
-                        />
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputBonos">Bonos</label>
-                        <input
-                          class="form-control"
-                          id="exampleInputBonos"
-                          placeholder="ej. 300"
-                        />
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputNota">Notas(opcional)</label>
-                        <input
-                          class="form-control"
-                          id="exampleInputNota"
-                          placeholder="Descripción del cambio"
-                        />
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-success">
-                        Confirmar
-                      </button>
-                      <button
-                        type="button"
+                  <div style="display: flex">
+                    <button
+                      type="button"
+                      style="margin-right: 5px"
+                      class="btn btn-warning"
+                      data-bs-toggle="modal"
+                      data-bs-target="#miModal2"
+                    >
+                      <i class="fa fa-pencil" aria-hidden="true"></i> Editar
+                    </button>
+                    {% comment %} Modal de eliminar {% endcomment %}
+                    <form
+                      style="margin-left: 5px"
+                      action="{% url 'delete_employee' employee.id %}"
+                      method="post"
+                    >
+                      {% csrf_token %}
+                      <input
+                        type="submit"
                         class="btn btn-danger"
-                        data-dismiss="modal"
-                      >
-                        Cancelar
-                      </button>
+                        value="Eliminar"
+                      />
+                    </form>
+                  </div>
+                </td>
+              </tr>
+              {% endfor %} {% comment %} Modales? {% endcomment %}
+              <form action="{% url 'update_employee' %}" method="post">
+                {% csrf_token %}
+                <div
+                  class="modal fade"
+                  id="miModal2"
+                  tabindex="-1"
+                  aria-hidden="true"
+                  aria-labelledby="modalTitle"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">
+                          Editar Empleado
+                        </h5>
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="form-group">
+                          <label for="exampleInputID">Id de Empleado</label>
+                          <input
+                            type="number"
+                            name="employee_id"
+                            min="1"
+                            step="1"
+                            value="1"
+                            class="form-control"
+                            id="exampleInputEmployeeID"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputNombre">Nombres</label>
+                          <input
+                            class="form-control"
+                            id="exampleInputNombre"
+                            aria-describedby="NombreHelp"
+                            placeholder="Nombres del Empleado"
+                            name="first_name"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputApellidos">Apellidos</label>
+                          <input
+                            class="form-control"
+                            id="exampleInputApellidos"
+                            aria-describedby="NombreHelp"
+                            placeholder="Apellidos del Empleado"
+                            name="last_name"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputSexo">Sexo</label>
+                          {% comment %} <div>
+                            <label
+                              style="margin-rigth: 10px"
+                              class="radio-inline"
+                              ><input
+                                type="radio"
+                                name="sex"
+                                value="M"
+                              />Masculino</label
+                            >
+                            <label
+                              style="margin-rigth: 10px"
+                              class="radio-inline"
+                              ><input
+                                type="radio"
+                                name="sex"
+                                value="F"
+                              />Femenino</label
+                            >
+                            <label
+                              style="margin-rigth: 10px"
+                              class="radio-inline"
+                              ><input
+                                type="radio"
+                                name="sex"
+                                value="O"
+                              />Otro</label
+                            >
+                          </div> {% endcomment %}
+
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sex" id="flexRadioDefault1" value="M">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                              Masculino
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sex" id="flexRadioDefault2" value="F">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                              Femenino
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sex" id="flexRadioDefault3" value="O">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                              Other
+                            </label>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputID">Email</label>
+                          <input
+                            type="email"
+                            class="form-control"
+                            id="exampleInputID"
+                            placeholder="Email del Empleado"
+                            name="email"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <!-- Date input -->
+                          <label for="date">Fecha de nacimiento</label>
+                          <input
+                            class="form-control"
+                            type="date"
+                            id="date"
+                            name="date_of_birth"
+                            placeholder="MM/DD/YYY"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <!-- Date input -->
+                          <label for="date">Fecha de contratación</label>
+                          <input
+                            class="form-control"
+                            type="date"
+                            id="date"
+                            name="hire_date"
+                            placeholder="MM/DD/YYY"
+                          />
+                        </div>
+
+                        <div class="form-group">
+                          <label for="exampleInputSueldo"
+                            >Salario mensual</label
+                          >
+                          <input
+                            type="number"
+                            name="monthly_salary"
+                            min="0"
+                            value="0.00"
+                            step="0.01"
+                            class="form-control"
+                            id="exampleInputSueldo"
+                            placeholder="Salario mensual"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputBonos">Bonos</label>
+                          <input
+                            type="number"
+                            name="bonus"
+                            min="0"
+                            value="0.00"
+                            step="0.01"
+                            class="form-control"
+                            id="exampleInputBonos"
+                            placeholder="Salario mensual"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputID">Id de contrato</label>
+                          <input
+                            type="number"
+                            name="contract_id"
+                            min="1"
+                            step="1"
+                            class="form-control"
+                            id="exampleInputID"
+                            placeholder="Ej. 1"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputDepartmentID"
+                            >Departamento</label
+                          >
+
+                          <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            name="department_id"
+                          >
+                            <option selected>Elige un departamento</option>
+                            <option name="department_id" value="1">
+                              Recursos Humanos
+                            </option>
+                            <option name="department_id" value="2">
+                              Soporte Técnico
+                            </option>
+                            <option name="department_id" value="3">
+                              Mercadotecnia
+                            </option>
+                            <option name="department_id" value="4">
+                              Ensamblaje
+                            </option>
+                            <option name="department_id" value="5">
+                              Distribución
+                            </option>
+                            <option name="department_id" value="6">
+                              Almacén
+                            </option>
+                            <option name="department_id" value="7">
+                              Finanzas
+                            </option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputJobID">Cargo</label>
+
+                          <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            name="job_id"
+                          >
+                            <option selected>Elige un cargo</option>
+                            <option name="job_id" value="1">
+                              Atención a emepleados
+                            </option>
+                            <option name="job_id" value="2">
+                              Atención de documentación
+                            </option>
+                            <option name="job_id" value="3">
+                              Gestion de salarios, activos y pasivos
+                            </option>
+                            <option name="job_id" value="4">
+                              Gestion de salario
+                            </option>
+                            <option name="job_id" value="5">
+                              Acomodo de inventario
+                            </option>
+                            <option name="job_id" value="6">
+                              Acomdo de productos y guias
+                            </option>
+                            <option name="job_id" value="7">Paqueteria</option>
+                            <option name="job_id" value="8">
+                              Administrador de software y herramientas
+                            </option>
+                            <option name="job_id" value="9">
+                              Atención a clientes
+                            </option>
+                            <option name="job_id" value="10">
+                              Atención al cliente
+                            </option>
+                            <option name="job_id" value="11">
+                              Diagnóstico y solución de problemas
+                            </option>
+                            <option name="job_id" value="12">
+                              Ensamblador primario
+                            </option>
+                            <option name="job_id" value="13">
+                              Ensamblador secundario
+                            </option>
+                            <option name="job_id" value="14">
+                              Encargado de mercadotecnica
+                            </option>
+                            <option name="job_id" value="15">
+                              Encargado de distribución
+                            </option>
+                            <option name="job_id" value="16">
+                              Encargado de almacen
+                            </option>
+                            <option name="job_id" value="15">Gerente</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <input
+                          type="submit"
+                          class="btn btn-success"
+                          value="Confirmar"
+                        />
+                        <button
+                          type="button"
+                          class="btn btn-danger"
+                          data-dismiss="modal"
+                        >
+                          Cancelar
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </form>
             </tbody>
           </table>
         </div>

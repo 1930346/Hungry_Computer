@@ -29,7 +29,7 @@ def fill():
     department.save()
 
     job = Job(
-        title="Programador",
+        title="Atencion a mepleados",
         min_salary=5000,
         max_salary=20000,
     )

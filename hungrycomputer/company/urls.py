@@ -17,5 +17,7 @@ urlpatterns = [
     path("finanzas", views.finanzas_view, name="finanzas"),
     #Recursos humanos
     path("recursos_humanos", views.recursos_humanos_view, name="recursos_humanos"),
+    path("delete_employee/<int:id>", views.delete_employee, name="delete_employee"),
+    path("update_employee", views.update_employee, name="update_employee"),
 
 ]
