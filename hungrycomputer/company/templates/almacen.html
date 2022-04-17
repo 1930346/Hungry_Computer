@@ -152,30 +152,31 @@
                 <td>{{product.stock}}</td>
                 <td>{{product.price}}</td>
                 <td>{{product.description}}</td>
-                <td style="display: flex">
-                  <button
-                    style="margin-left: 5px"
-                    type="button"
-                    class="btn btn-warning"
-                    aria-hidden="true"
-                    data-bs-toggle="modal"
-                    data-bs-target="#ModalEdicionProducto"
-                  >
-                    {% comment %} <i class="fa fa-pencil"></i> {% endcomment %}
-                    Editar
-                  </button>
-                  <form
-                    style="margin-left: 5px"
-                    action="{% url 'delete_product' product.id %}"
-                    method="post"
-                  >
-                    {% csrf_token %}
-                    <input
-                      type="submit"
-                      class="btn btn-danger"
-                      value="Eliminar"
-                    />
-                  </form>
+                <td>
+                  <div style="display: flex">
+                    <button
+                      style="margin-left: 5px"
+                      type="button"
+                      class="btn btn-warning"
+                      aria-hidden="true"
+                      data-bs-toggle="modal"
+                      data-bs-target="#ModalEdicionProducto"
+                    >
+                      <i class="fa fa-pencil"></i>
+                      | Editar
+                    </button>
+                    <form
+                      style="margin-left: 5px"
+                      action="{% url 'delete_product' product.id %}"
+                      method="post"
+                    >
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-danger">
+                        <i class="fa fa-trash" aria-hidden="true"></i> |
+                        Eliminar
+                      </button>
+                    </form>
+                  </div>
                   {% comment %}
                   <button type="button" class="btn btn-danger">
                     <i class="fa fa-trash" aria-hidden="true"></i> | Eliminar

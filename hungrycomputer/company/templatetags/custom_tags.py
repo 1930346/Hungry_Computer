@@ -8,3 +8,9 @@ def plus(value, arg):
     print(type(value))
     return value * arg
 
+
+@register.filter
+def concat_names(value, arg):
+    value = str(value) + " " + str(arg)
+    print(type(value))
+    return value
