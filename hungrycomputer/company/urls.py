@@ -21,5 +21,8 @@ urlpatterns = [
     path("recursos_humanos", views.recursos_humanos_view, name="recursos_humanos"),
     path("delete_employee/<int:id>", views.delete_employee, name="delete_employee"),
     path("update_employee", views.update_employee, name="update_employee"),
-
+    #Soporte Vista tabla
+    path("soporte", views.soporte_view, name="soporte"),
+    path("delete_problem/<int:id>", views.delete_problem, name="delete_problem"),
+    path("update_problem", views.update_problem, name="update_problem"),
 ]

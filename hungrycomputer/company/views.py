@@ -146,6 +146,12 @@ def update_employee(request):
         department_id = request.POST.get("department_id")
         job_id = request.POST.get("job_id")
         print(first_name, last_name, monthly_salary)
+
+        #Check if the fields are empty
+        if employee_id is None or first_name is None or last_name is None or email is None or date_of_birth is None or hire_date is None or monthly_salary is None or bonus is None or contract_id is None or department_id is None or job_id is None:
+            return redirect(recursos_humanos_view)
+
+
         try:
             employee = Employee.objects.get(id=employee_id)
             employee.first_name = first_name
@@ -162,3 +168,37 @@ def update_employee(request):
         except Employee.DoesNotExist:
             print("El empleado no existe")
     return redirect(recursos_humanos_view)
+
+
+#Soporte
+def soporte_view(request):
+    context = {"problemas": Problem.objects.all()}
+    print(context)
+    return render(request, "soporte.html", context)
+
+def delete_problem(request, id):
+    if request.method == "POST":
+        problem = Problem.objects.get(id=id)
+        problem.delete()
+    return redirect(soporte_view)
+
+def update_problem(request):
+    if request.method == "POST":
+        problem_id = request.POST.get("problem_id")
+        employee_id = request.POST.get("employee_id")
+        type = request.POST.get("type")
+        description = request.POST.get("description")
+        print(problem_id, employee_id, type, description)
+        if problem_id is None or employee_id is None or type is None or description is None:
+            return redirect(soporte_view)
+        
+        try:
+            problem = Problem.objects.get(id=problem_id)
+            problem.employee_id = employee_id
+            problem.type = type
+            problem.description = description
+            problem.date = problem.date
+            problem.save()
+        except Problem.DoesNotExist:
+            print("El problema no existe")
+    return redirect(soporte_view)
