@@ -266,6 +266,22 @@ def finanzas_view(request):
 
     return render(request, "finanzas.html", context)
 
+def update_salary(request):
+    if request.method == "POST":
+        e_id = request.POST.get("InputID")
+        job_name = request.POST.get("InputPuesto")
+        salary = request.POST.get("InputSueldo")
+        bonus = request.POST.get("InputBonos")
+        try:
+            employee = Employee.objects.get(id=e_id)
+            job = Job.objects.get(title=job_name)
+            employee.monthly_salary = salary
+            employee.bonus = bonus
+            employee.save()
+        except Employee.DoesNotExist:
+            print("El empleado no existe no existe")
+    return redirect(finanzas_view)
+
 
 # Recursos Humanos
 def recursos_humanos_view(request):
