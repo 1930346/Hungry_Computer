@@ -37,12 +37,12 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" href="almacen">Almacen</a></li>
-                  <li><a class="dropdown-item" href="distribuicion">Distribución</a></li>
+                  <li><a class="dropdown-item" href="distribucion">Distribución</a></li>
                   <li><a class="dropdown-item" href="ensamblaje">Ensamblaje</a></li>
                   <li><a class="dropdown-item" href="finanzas">Finanzas</a></li>
                   <li><a class="dropdown-item" href="mercadotecnia">Mercadotecnia</a></li>
-                  <li><a class="dropdown-item" href="recursos humanos">Recursos Humanos</a></li>
-                  <li><a class="dropdown-item" href="soporte.html">Soporte</a></li>
+                  <li><a class="dropdown-item" href="recursos_humanos">Recursos Humanos</a></li>
+                  <li><a class="dropdown-item" href="soporte">Soporte</a></li>
                   <!--<li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="#">Something else here</a></li>-->
                 </ul>
@@ -92,7 +92,7 @@
                   {%for employee in employees %}
                   
                   <tr>      
-                    <td>{{employee.first_name}}</td>
+                    <td>{{employee.first_name | concat_names:employee.last_name}}</td>
                     <td>{{employee.id}}</td>
                     <td>{{employee.job_id.title}}</td>
                     <td>{{employee.monthly_salary}}</td>
@@ -112,33 +112,75 @@
                             </div>
 
                             <div class="modal-body">
-                              <div class="form-group">
-                                  <label for="exampleInputNombre">Nombre</label>
-                                  <input  class="form-control" id="exampleInputNombre" name="inputName" aria-describedby="NombreHelp" placeholder="Nombre del Empleado"disabled>
-                                </div>
                                 <div class="form-group">
                                   <label for="exampleInputID">ID</label>
                                   <input  class="form-control" id="exampleInputID" name="InputID" placeholder="ID del Empleado">
                                 </div>
                                 <div class="form-group">
-                                  <label for="exampleInputPuesto">Puesto</label>
-                                  <input  class="form-control" id="exampleInputPuesto" name="InputPuesto" placeholder="Puesto del Empleado">
+                                  <label for="exampleInputJobID">Cargo</label>
+        
+                                  <select
+                                    class="form-select"
+                                    aria-label="Default select example"
+                                    name="job_id"
+                                  >
+                                    <option selected>Elige un cargo</option>
+                                    <option name="job_id" value="1">
+                                      Atención a emepleados
+                                    </option>
+                                    <option name="job_id" value="2">
+                                      Atención de documentación
+                                    </option>
+                                    <option name="job_id" value="3">
+                                      Gestion de salarios, activos y pasivos
+                                    </option>
+                                    <option name="job_id" value="4">
+                                      Gestion de salario
+                                    </option>
+                                    <option name="job_id" value="5">
+                                      Acomodo de inventario
+                                    </option>
+                                    <option name="job_id" value="6">
+                                      Acomdo de productos y guias
+                                    </option>
+                                    <option name="job_id" value="7">Paqueteria</option>
+                                    <option name="job_id" value="8">
+                                      Administrador de software y herramientas
+                                    </option>
+                                    <option name="job_id" value="9">
+                                      Atención a clientes
+                                    </option>
+                                    <option name="job_id" value="10">
+                                      Atención al cliente
+                                    </option>
+                                    <option name="job_id" value="11">
+                                      Diagnóstico y solución de problemas
+                                    </option>
+                                    <option name="job_id" value="12">
+                                      Ensamblador primario
+                                    </option>
+                                    <option name="job_id" value="13">
+                                      Ensamblador secundario
+                                    </option>
+                                    <option name="job_id" value="14">
+                                      Encargado de mercadotecnica
+                                    </option>
+                                    <option name="job_id" value="15">
+                                      Encargado de distribución
+                                    </option>
+                                    <option name="job_id" value="16">
+                                      Encargado de almacen
+                                    </option>
+                                    <option name="job_id" value="15">Gerente</option>
+                                  </select>
                                 </div>
                                 <div class="form-group">
                                   <label for="exampleInputSueldo">Sueldo Base</label>
                                   <input  class="form-control" id="exampleInputSueldo" name="InputSueldo" placeholder="Sueldo del Empleado">
                                 </div>
                                 <div class="form-group">
-                                  <label for="exampleInputDescuento">Descuentos</label>
-                                  <input  class="form-control" id="exampleInputDescuento" name="InputDescuento" placeholder="ej. 15%">
-                                </div>
-                                <div class="form-group">
                                   <label for="exampleInputBonos">Bonos</label>
                                   <input  class="form-control" id="exampleInputBonos" name="InputBonos"placeholder="ej. 300">
-                                </div>
-                                <div class="form-group">
-                                  <label for="exampleInputNota">Notas(opcional)</label>
-                                  <input  class="form-control" id="exampleInputNota" name="InputNota" placeholder="Descripción del cambio">
                                 </div>
                             </div>
                             <div class="modal-footer">
