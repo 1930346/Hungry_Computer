@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="eng">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Almacen</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+
+  <body>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+        -->
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="home.html">Hungry Computer</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="home.html"
+                >Inicio</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                style="color: aliceblue"
+              >
+                Departamentos
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <a class="dropdown-item" href="almacen.html">Almacen</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="distribuicion.html"
+                    >Distribución</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="ensamblaje.html">Ensamblaje</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="finanzas.html">Finanzas</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="mercadoternia.html"
+                    >Mercadotecnia</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="recursos humanos.html"
+                    >Recursos Humanos</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="soporte.html">Soporte</a>
+                </li>
+                <!--<li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>-->
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#"
+                >Contactanos</a
+              >
+            </li>
+          </ul>
+          <form class="d-flex">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href=""
+                  >Usuario</a
+                >
+              </li>
+            </ul>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+              <li class="breadcrumb-item">Departamentos</li>
+              <li class="breadcrumb-item active" aria-current="page">
+                Almacen
+              </li>
+            </ol>
+          </nav>
+
+          <h1>Almacen</h1>
+          <hr />
+          <table class="table">
+            <thead class="table-primary">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Marca</th>
+                <th scope="col">Modelo</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Notas</th>
+                <th scope="col">Administrar</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for product in products %}
+              <tr>
+                <th scope="row">{{product.id}}</th>
+                <td>{{product.name}}</td>
+                <td>{{product.brand}}</td>
+                <td>{{product.model}}</td>
+                <td>{{product.stock}}</td>
+                <td>{{product.price}}</td>
+                <td>{{product.description}}</td>
+                <td style="display: flex">
+                  <button
+                    style="margin-left: 5px"
+                    type="button"
+                    class="btn btn-warning"
+                    aria-hidden="true"
+                    data-bs-toggle="modal"
+                    data-bs-target="#ModalEdicionProducto"
+                  >
+                    {% comment %} <i class="fa fa-pencil"></i> {% endcomment %}
+                    Editar
+                  </button>
+                  <form
+                    style="margin-left: 5px"
+                    action="{% url 'delete_product' product.id %}"
+                    method="post"
+                  >
+                    {% csrf_token %}
+                    <input
+                      type="submit"
+                      class="btn btn-danger"
+                      value="Eliminar"
+                    />
+                  </form>
+                  {% comment %}
+                  <button type="button" class="btn btn-danger">
+                    <i class="fa fa-trash" aria-hidden="true"></i> | Eliminar
+                  </button>
+                  {% endcomment %}
+                </td>
+              </tr>
+              {% endfor %}
+
+              <!--Modal de Agregar producto-->
+              <form action="{% url 'add_product' %}" method="post">
+                {% csrf_token %}
+                <div
+                  class="modal fade"
+                  id="ModalAgregadoProducto"
+                  tabindex="-1"
+                  aria-hidden="true"
+                  aria-labelledby="modalTitle"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">
+                          Agregar producto
+                        </h5>
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="modal"
+                          aria-label="Cancelar"
+                        ></button>
+                        <span aria-hidden="true">&times;</span>
+                      </div>
+                      <div class="modal-body">
+                        <div class="form-group">
+                          <label for="exampleInputNombre">#</label>
+                          <input
+                            class="form-control"
+                            id="IdProd"
+                            name="IdProd"
+                            aria-describedby="IdHelp"
+                            placeholder="Identificador del producto"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputID">Nombre</label>
+                          <input
+                            class="form-control"
+                            id="NombreProd"
+                            name="NombreProd"
+                            placeholder="Nombre del producto"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputPuesto">Marca</label>
+                          <input
+                            class="form-control"
+                            id="MarcaProd"
+                            name="MarcaProd"
+                            placeholder="Marca del producto"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputDescuento">Modelo</label>
+                          <input
+                            class="form-control"
+                            id="ModeloProd"
+                            name="ModeloProd"
+                            placeholder="Numero de Modelo"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputDescuento">Stock</label>
+                          <input
+                            class="form-control"
+                            id="StockProd"
+                            name="StockProd"
+                            placeholder="Cantidad Numerica"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputBonos">Precio</label>
+                          <input
+                            class="form-control"
+                            id="PrecioProd"
+                            name="PrecioProd"
+                            placeholder="Precio del producto"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputNota">Notas(opcional)</label>
+                          <input
+                            class="form-control"
+                            id="exampleInputNota"
+                            name="exampleInputNota"
+                            placeholder="Descripción del cambio"
+                          />
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <input
+                          type="submit"
+                          class="btn btn-success"
+                          value="Confirmar"
+                        />
+                        <button
+                          type="button"
+                          class="btn btn-danger"
+                          data-dismiss="modal"
+                        >
+                          Cancelar
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+              <!--Modal de Editar producto-->
+              <form action="{% url 'update_product' %}" method="post">
+                {% csrf_token %}
+                <div
+                  class="modal fade"
+                  id="ModalEdicionProducto"
+                  tabindex="-1"
+                  aria-hidden="true"
+                  aria-labelledby="modalTitle"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">
+                          Editar producto
+                        </h5>
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="modal"
+                          aria-label="Cancelar"
+                        ></button>
+                        <span aria-hidden="true">&times;</span>
+                      </div>
+                      <div class="modal-body">
+                        <div class="form-group">
+                          <label for="exampleInputNombre">#</label>
+                          <input
+                            class="form-control"
+                            id="IdProd"
+                            name="IdProd"
+                            aria-describedby="IdHelp"
+                            placeholder="Identificador del producto"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputID">Nombre</label>
+                          <input
+                            class="form-control"
+                            id="NombreProd"
+                            name="NombreProd"
+                            placeholder="Nombre del producto"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputPuesto">Marca</label>
+                          <input
+                            class="form-control"
+                            id="MarcaProd"
+                            name="MarcaProd"
+                            placeholder="Marca del producto"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputDescuento">Modelo</label>
+                          <input
+                            class="form-control"
+                            id="ModeloProd"
+                            name="ModeloProd"
+                            placeholder="Numero de Modelo"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputDescuento">Stock</label>
+                          <input
+                            class="form-control"
+                            id="StockProd"
+                            name="StockProd"
+                            placeholder="Cantidad Numerica"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputBonos">Precio</label>
+                          <input
+                            class="form-control"
+                            id="PrecioProd"
+                            name="PrecioProd"
+                            placeholder="Precio del producto"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputNota">Notas(opcional)</label>
+                          <input
+                            class="form-control"
+                            id="exampleInputNota"
+                            name="exampleInputNota"
+                            placeholder="Descripción del cambio"
+                          />
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <input
+                          type="submit"
+                          class="btn btn-success"
+                          value="Confirmar"
+                        />
+                        <button
+                          type="button"
+                          class="btn btn-danger"
+                          data-dismiss="modal"
+                        >
+                          Cancelar
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </tbody>
+          </table>
+          <button
+            type="button"
+            class="btn btn-success"
+            data-bs-toggle="modal"
+            data-bs-target="#ModalAgregadoProducto"
+          >
+            <i class="fa fa-plus" aria-hidden="true"></i> | Agregar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+          <div
+            class="alert alert-warning"
+            id="contact"
+            role="alert"
+            align="center"
+            style="margin: 2px"
+          >
+            <h2>Contactanos</h2>
+            <p>
+              Correo electrónico: HungryComputer@example.com<br />
+              Lada sin costo: 123-45-67-89<br />
+            </p>
+
+            <p>
+              <b>Departamento de atención al cliente:</b><br />
+              Universidad Politécnica de Victoria - Departamento de ITI - 2do
+              Piso<br />
+              Cd. Victoria, Tamaulipas, México<br />
+              C.P.87000
+            </p>
+            <p>
+              <b>Necesitas ayuda?</b><br />
+              Utiliza este enlace para atender tus dudas:<br />
+              <a href="form-soporte/fromEmpleado.html">Llenar Formulario</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br /><br />
+    <footer class="text-center">
+      <p style="color: aliceblue; background-color: #646569">
+        Copyright © 2022. Todos los derechos reservados. / HungryComputer 2022 -
+        2022
+      </p>
+    </footer>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="../../../Documentos/js/jquery-3.3.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../../../Documentos/js/popper.min.js"></script>
+    <script src="../../../Documentos/js/bootstrap-4.3.1.js"></script>
+  </body>
+</html>

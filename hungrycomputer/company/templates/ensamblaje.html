@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  </head>
+  <body>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="home.html">Hungry Computer</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="home.html">Inicio</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: aliceblue;">
+                  Departamentos
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="almacen.html">Almacen</a></li>
+                  <li><a class="dropdown-item" href="distribuicion.html">Distribución</a></li>
+                  <li><a class="dropdown-item" href="ensamblaje.html">Ensamblaje</a></li>
+                  <li><a class="dropdown-item" href="finanzas.html">Finanzas</a></li>
+                  <li><a class="dropdown-item" href="mercadoternia.html">Mercadotecnia</a></li>
+                  <li><a class="dropdown-item" href="recursos humanos.html">Recursos Humanos</a></li>
+                  <li><a class="dropdown-item" href="soporte.html">Soporte</a></li>
+                  <!--<li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>-->
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Contactanos</a>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="">Usuario</a>
+                </li>
+              </ul>
+            </form>
+          </div>
+        </div>
+      </nav>
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                  <li class="breadcrumb-item">Departamentos</li>
+                  <li class="breadcrumb-item active" aria-current="page">Ensamblaje</li>
+                </ol>
+              </nav>
+              
+              <h1>Ensamblaje</h1>
+              <hr>
+            <table class="table">
+                <thead class="table-primary">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Titular</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Administrar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for assembly_order in assembly_orders %}
+                  <tr>
+                    <th scope="row">{{assembly_order.id}}</th>
+                    <td>{{assembly_order.attendant}}</td>
+                    <td>{{assembly_order.finish_date}}</td>
+                    <td>
+                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#ModalVer"><i class="fa fa-eye" aria-hidden="true"></i> | Ver</button>
+                        <button type="button" class="btn btn-warning"  data-bs-toggle="modal" data-bs-target="#ModalEditar"><i class="fa fa-pencil" aria-hidden="true"></i> | Editar</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ModalEliminar"><i class="fa fa-trash" aria-hidden="true"></i> | Eliminar</button>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              <button type="button" class="mt-5 mx-5 btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalAgregar"><i class="fa fa-plus" aria-hidden="true"></i> | Agregar</button>
+
+    <div class="modal fade" id="ModalAgregar" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle">Agregar Pedido</h5>
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form method="POST" action="{% url 'add_assembly_order' %}">
+          {% csrf_token %}
+          <div class="modal-body">
+            <div class="form-group">
+                <label for="exampleInputFolio">Folio</label>
+                <input  class="form-control" id="exampleInputFolio" aria-describedby="folioHelp" placeholder="Ingresar folio">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputTitular">Titular</label>
+                <input  class="form-control" id="exampleInputTitular" placeholder="Ingresar titular del pedido">
+              </div>
+                <div class="form-group">
+                <label for="exampleInputFecha">Fecha</label>
+                <input type="date" class="form-control" id="exampleInputFecha" placeholder="Fecha del pedido">
+              </div>
+                <div class="form-group">
+                <label for="exampleInputDescripcion">Descripcion</label>
+                <br>
+                <textarea class="form-control" id="exampleFormDescripcionTextarea1" rows="3" placeholder="Descripcion de las piezas del pedido"></textarea>
+              </div>
+                <div class="form-group">
+                <label for="exampleInputNotas">Notas del ensamblador</label>
+                <br>
+                <textarea class="form-control" id="exampleFormNotasTextarea1" rows="3"></textarea>
+              </div>
+          </div>
+        
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success">Agregar</button>
+            <button type="reset"  class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+          </div>
+          </div>
+        </form>
+        </div>
+      </div>
+
+      <div class="modal fade" id="ModalEditar" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle">Editar Pedido</h5>
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form method="POST" action="{% url 'update_assembly_order' %}">
+          {% csrf_token %}
+          <div class="modal-body">
+            <div class="form-group">
+                <label for="exampleInputFolio">Folio</label>
+                <input  class="form-control" id="exampleInputFolio" aria-describedby="folioHelp" disabled>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputTitular">Titular</label>
+                <input  class="form-control" id="exampleInputTitular" disabled>
+              </div>
+                <div class="form-group">
+                <label for="exampleInputFecha">Fecha</label>
+                <input  class="form-control" id="exampleInputFecha" disabled>
+              </div>
+                <div class="form-group">
+                <label for="exampleInputDescripcion">Descripcion</label>
+                <br>
+                <textarea class="form-control" id="exampleFormDescripcionTextarea1" rows="3" placeholder="Descripcion de las piezas del pedido"></textarea>
+              </div>
+                <div class="form-group">
+                <label for="exampleInputNotas">Notas del ensamblador</label>
+                <br>
+                <textarea class="form-control" id="exampleFormNotasTextarea1" rows="3" placeholder="Opcional"></textarea>
+              </div>
+          </div>
+        </form>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success">Editar</button>
+            <button type="reset" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <!--div class="modal fade" id="ModalVer" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle">Informacion del Pedido</h5>
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form method="POST" action="{% url 'update_assembly_order' %}">
+          {% csrf_token %}
+          <div class="modal-body">
+            <div class="form-group">
+                <label for="exampleInputFolio">Folio</label>
+                <input  class="form-control" id="exampleInputFolio" aria-describedby="folioHelp"  disabled>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputTitular">Titular</label>
+                <input  class="form-control" id="exampleInputTitular" disabled>
+              </div>
+                <div class="form-group">
+                <label for="exampleInputFecha">Fecha</label>
+                <input  class="form-control" id="exampleInputFecha" disabled>
+              </div>
+                <div class="form-group">
+                <label for="exampleInputDescripcion">Descripcion</label>
+                <br>
+                <textarea class="form-control" id="exampleFormDescripcionTextarea1" rows="3" disabled></textarea>
+              </div>
+                <div class="form-group">
+                <label for="exampleInputNotas">Notas del ensamblador</label>
+                <br>
+                <textarea class="form-control" id="exampleFormNotasTextarea1" rows="3" disabled></textarea>
+              </div>
+          </div>
+        </form>
+          <div class="modal-footer">
+            <button type="reset" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+          </div>
+          </div>
+        </div>
+      </div-->
+
+      <div class="modal fade" id="ModalEliminar" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle">Eliminar Pedido</h5>
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <h4>¿Desea eliminar este pedido?</h4>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success">Aceptar</button>
+            <button type="reset" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+          </div>
+          </div>
+        </div>
+      </div>
+
+          </div>
+        </div>
+      </div>
+
+
+                    
+
+
+<br><br>
+      <hr>
+      <br>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+              <div class="alert alert-warning" id="contact" role="alert" align="center" style="margin: 2px;">
+                <h2>Contactanos</h2>
+                <p>Correo electrónico: HungryComputer@example.com<br>
+                Lada sin costo: 123-45-67-89<br>
+                <p><b>Departamento de atención al cliente:</b><br>
+                Universidad Politécnica de Victoria - Departamento de ITI - 2do Piso<br>
+                Cd. Victoria, Tamaulipas, México<br>
+                C.P.87000</p>
+          </p>
+        </div>
+        </div>
+      </div>
+    </div>
+    <br><br>
+    <footer class="text-center">
+            <p style="color: aliceblue; background-color: #646569;">Copyright © 2022. Todos los derechos reservados. / HungryComputer 2022 - 2022</p>
+    </footer>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="../../../Documentos/js/jquery-3.3.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../../../Documentos/js/popper.min.js"></script>
+    <script src="../../../Documentos/js/bootstrap-4.3.1.js"></script>
+  </body>
+</html>
