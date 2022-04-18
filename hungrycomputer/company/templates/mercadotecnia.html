@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mercadotecnia</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static "css/style.css"%}">
       <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,38 +30,57 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="home.html">Hungry Computer</a>
+      <a class="navbar-brand" href="home">Hungry Computer</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="home.html">Inicio</a>
+            <a class="nav-link active" aria-current="page" href="home">Inicio</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: aliceblue;">
               Departamentos
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Almacen</a></li>
-              <li><a class="dropdown-item" href="#">Distribución</a></li>
-              <li><a class="dropdown-item" href="#">Ensamblaje</a></li>
-              <li><a class="dropdown-item" href="#">Finanzas</a></li>
-              <li><a class="dropdown-item" href="#">Mercadotecnia</a></li>
-              <li><a class="dropdown-item" href="#">Recursos Humanos</a></li>
-              <li><a class="dropdown-item" href="#">Soporte</a></li>
+              <li>
+                <a class="dropdown-item" href="almacen">Almacen</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="distribucion"
+                  >Distribución</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="ensamblaje">Ensamblaje</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="finanzas">Finanzas</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="mercadotecnia"
+                  >Mercadotecnia</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="recursos_humanos"
+                  >Recursos Humanos</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="soporte">Soporte</a>
+              </li>
               <!--<li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>-->
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>-->
             </ul>
           </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="formulario_soporte"
+              >Contactanos</a
+            >
+          </li>
         </ul>
-        <form class="d-flex">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="">Usuario</a>
-            </li>
-          </ul>
         </form>
       </div>
     </div>
@@ -72,7 +92,7 @@
      <div>
         <div>
         <div class="container">
-          <img id="twentyfive" class="imggrid"  src="img/amd.png" alt="">
+          <img id="twentyfive" class="imggrid"  src='{%static "images/amd.png"%}' alt="">
           <div>
             <h3>Amd</h3>
           <p id="seventyfive">Advanced Micro Devices, Inc. es una compañía estadounidense de semiconductores con sede en Santa Clara, California, que desarrolla procesadores de computación y productos tecnológicos similares de consumo.!</p>
@@ -85,7 +105,7 @@
       <div>
         <div>
         <div class="container">
-          <img id="twentyfive" class="imggrid"  src="img/asus.png" alt="">
+          <img id="twentyfive" class="imggrid"  src='{% static "images/asus.png"%}' alt="">
           <div>
           <h3>Asus</h3>
           <p id="seventyfive">ASUS es una empresa multinacional establecida en Taiwán desde 1989 que diseña y fabrica hardware de informática y electrónica de consumo. Dedicada a crear soluciones que proporcionan una vida más inteligente, ASUS es la marca líder en placas base y gaming a nivel internacional, así como uno de los tres principales fabricantes de portátiles del mundo.</p>
@@ -98,7 +118,7 @@
       <div>
         <div>
         <div class="container">
-          <img id="logo" class="logo"  src="img/hp.png" alt="">
+          <img id="twentyfive" class="imggrid"  src='{%static "images/hp.png"%}' alt="">
           <div>
           <h3>HP</h3>
          <p id="seventyfive">HP Inc. (conocida como HP), es una empresa estadounidense con sede en Palo Alto, California, surgida de la separación de Hewlett-Packard en dos empresas en noviembre de 2015.
@@ -115,7 +135,7 @@
       <div>
         <div>
         <div class="container">
-          <img id="twentyfive" class="imggrid"  src="img/intel.png" alt="">
+          <img id="twentyfive" class="imggrid"  src='{% static "images/intel.png"%}' alt="">
           <div>
           <h3>Intel</h3>
           <p id="seventyfive">Intel Corporation es el mayor fabricante de circuitos integrados del mundo según su cifra de negocio anual.​ La compañía estadounidense es la creadora de la serie de procesadores x86, los procesadores más comúnmente encontrados en la mayoría de las computadoras personales. </p>
@@ -128,7 +148,7 @@
       <div>
         <div>
         <div class="container">
-          <img id="twentyfive" class="imggrid" src="img/kingstom.png" alt="">
+          <img id="twentyfive" class="imggrid" src='{%static "images/kingstom.png"%}' alt="">
           <div>
           <h3>Kingstom</h3>
           <p id="seventyfive">Kingston Corporation es un fabricante estadounidense de productos de memorias de ordenadores. Está localizado en Fountain Valley, California. Tiene departamentos de facturación y logísticos en el Reino Unido, Irlanda, Malasia, China y Taiwán.</p>
@@ -140,7 +160,7 @@
       <div>
         <div>
         <div class="container">
-          <img id="twentyfive" class="imggrid" src="img/logos/logitech.png" alt="">
+          <img id="twentyfive" class="imggrid" src='{% static "images/logitech.png"%}' alt="">
           <div>
           <h3>Logitech</h3>
           <p id="seventyfive">Logitech es una empresa suiza dedicada a la electrónica que fabrica periféricos para computadoras personales, principalmente ratones, teclados, altavoces y auriculares. Últimamente la compañía ha comenzado a crear accesorios para dispositivos portátiles tales como tabletas y teléfonos inteligentes.</p>
@@ -153,7 +173,7 @@
       <div>
        <div>
         <div class="container">
-          <img id="twentyfive" class="imggrid" src="img/yeiyan.png" alt="">
+          <img id="twentyfive" class="imggrid" src='{% static "images/yeiyan.png"%}' alt="">
           <div>
           <h3>yeiyan</h3>
           <p id="seventyfive">En Yeyian desarrollamos y creamos productos que te acompañarán en los momentos de relajación, diversión y entretenimiento. Haz que cada batalla sea única; sé un guerrero y lucha hasta el final.</p>

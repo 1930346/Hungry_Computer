@@ -259,6 +259,7 @@ def soporte_form(request):
         problema = request.POST.get("problema")
         descripcion = request.POST.get("descripcion")
         print(id, problema, descripcion)
+    return render(request, "fromEmpleado.html")
 
 # Finanzas
 def finanzas_view(request):

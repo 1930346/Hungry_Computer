@@ -3,7 +3,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("", views.index, name="index"),
+    path("", views.home_view, name="index"),
     path("sform", views.simple_form, name="sform"),
     path("delete_simple_form/<int:id>", views.delete_simple_form_id, name="delete_simple_form"),
     # almacen
@@ -26,6 +26,7 @@ urlpatterns = [
     path("update_salary",views.update_salary, name="update_salary"),
     #Recursos humanos
     path("recursos_humanos", views.recursos_humanos_view, name="recursos_humanos"),
+    # path("recursos\%20humanos", views.recursos_humanos_view, name="recursos_humanos2"),
     path("delete_employee/<int:id>", views.delete_employee, name="delete_employee"),
     path("update_employee", views.update_employee, name="update_employee"),
     #Soporte Vista tabla
