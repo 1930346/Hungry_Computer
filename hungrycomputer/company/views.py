@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from django.http import HttpResponse
 from matplotlib.style import context
-from company.models import Assembly_order, Problem, Product
+from company.models import Assembly_order, Employee, Problem, Product
 
 
 def index(request):
@@ -112,10 +112,12 @@ def ensamble_view(request):
 def add_assembly_order(request):
     if request.method == "POST":
         id = request.POST.get("exampleInputFolio")
-        attendant = request.POST.get("exampleInputTitular")
+        attendant_id = request.POST.get("exampleInputTitular")
         finish_date = request.POST.get("exampleInputFecha")
         description = request.POST.get("exampleFormDescripcionTextarea1")
+        attendant=Employee.objects.get(id="attendant_id")
         notes = request.POST.get("exampleFormNotasTextarea1")
+        print(id, attendant_id, finish_date, description, notes)
         assembly_order = Assembly_order(
             id=id,
             attendant=attendant,
