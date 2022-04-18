@@ -252,9 +252,6 @@ def soporte_form(request):
         problema = request.POST.get("problema")
         descripcion = request.POST.get("descripcion")
         print(id, problema, descripcion)
-        problem = Problem(employee_id=id, type=problema, description=descripcion)
-    return render(request, "fromEmpleado.html")
-
 
 # Finanzas
 def finanzas_view(request):
@@ -268,13 +265,22 @@ def finanzas_view(request):
 
 def update_salary(request):
     if request.method == "POST":
-        e_id = request.POST.get("InputID")
-        job_name = request.POST.get("InputPuesto")
+        
+        employee_id = request.POST.get("InputID")
+        job_id = request.POST.get("job_id")
         salary = request.POST.get("InputSueldo")
         bonus = request.POST.get("InputBonos")
+        print(job_id)
+        if (
+            employee_id is None
+            or salary is None
+            or bonus is None
+            or job_id is None
+        ):
+            return redirect(finanzas_view)
         try:
-            employee = Employee.objects.get(id=e_id)
-            job = Job.objects.get(title=job_name)
+            employee = Employee.objects.get(id=employee_id)
+            employee.job_id = Job.objects.get(id=job_id)
             employee.monthly_salary = salary
             employee.bonus = bonus
             employee.save()
@@ -339,7 +345,7 @@ def update_employee(request):
             employee.bonus = bonus
             employee.contract_id = contract_id
             employee.department_id = Department.objects.get(id=department_id)
-            employee.job_id = job_id = Job.objects.get(id=job_id)
+            employee.job_id = Job.objects.get(id=job_id)
             employee.save()
         except Employee.DoesNotExist:
             print("El empleado no existe")
