@@ -31,7 +31,7 @@ uno de los departamentos con los que se cuenta.
 - Daniel Sánchez Sánchez
 
 # Organigrama Empresarial
-![Organigrama empresarial de Hungry Computer](images_readme/organigrama.png)
+![Organigrama empresarial de Hungry Computer](images_readme/organigrama.png?usp=sharing)
 
 # Base de datos del proyecto
 ![Base de datos de hungry_computer](images_readme/Hungry_Computer.png?usp=sharing)
