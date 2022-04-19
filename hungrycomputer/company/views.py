@@ -394,3 +394,58 @@ def update_problem(request):
         except Problem.DoesNotExist:
             print("El problema no existe")
     return redirect(soporte_view)
+
+
+
+#Ensamblaje
+
+#ENSAMBLE
+def ensamble_view(request):
+    context = {"assembly_orders": Assembly_order.objects.all()}
+    print(context)
+    return render(request, "ensamblaje.html", context)
+
+def add_assembly_order(request):
+    if request.method == "POST":
+        id = request.POST.get("exampleInputFolio")
+        attendant_id = request.POST.get("exampleInputTitular")
+        finish_date = request.POST.get("exampleInputFecha")
+        description = request.POST.get("exampleFormDescripcionTextarea1")
+        attendant=Employee.objects.get(id=attendant_id)
+        notes = request.POST.get("exampleFormNotasTextarea1")
+        print(id, attendant_id, finish_date, description, notes)
+        assembly_order = Assembly_order(
+            id=id,
+            attendant=attendant,
+            finish_date=finish_date,
+            description=description,
+            notes=notes,
+        )
+        assembly_order.save()
+    return render(request, ensamble_view)
+
+def update_assembly_order(request):
+    if request.method == "POST":
+        id = request.POST.get("exampleInputFolio")
+        attendant = request.POST.get("exampleInputTitular")
+        finish_date = request.POST.get("exampleInputFecha")
+        description = request.POST.get("exampleFormDescripcionTextarea1")
+        notes = request.POST.get("exampleFormNotasTextarea1")
+
+        try:
+            assembly_order = Product.objects.get(id=id)
+            assembly_order.attendant = attendant
+            assembly_order.finish_date = finish_date
+            assembly_order.description = description
+            assembly_order.description = description
+            assembly_order.notes = notes
+            assembly_order.save()
+        except Product.DoesNotExist:
+            print("El pedido no existe")
+    return redirect(ensamble_view)
+
+def delete_assembly_order(request, id):
+    if request.method == "POST":
+        assembly_order = Assembly_order.objects.get(id=id)
+        assembly_order.delete()
+    return redirect(ensamble_view)

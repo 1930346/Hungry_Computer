@@ -37,4 +37,9 @@ urlpatterns = [
     path("home", views.home_view, name="home"),
     #Mercadotecnia
     path("mercadotecnia", views.mercadotecnia_view, name="mercadotecnia"),
+    #ensamble
+    path("ensamblaje", views.ensamble_view, name="ensamblaje"),
+    path("add_assembly_order", views.add_assembly_order, name="add_assembly_order"),
+    path("update_assembly_order", views.update_assembly_order, name="update_assembly_order"),
+    path("delete_assembly_order/<int:id>", views.delete_assembly_order, name="delete_assembly_order"),
 ]

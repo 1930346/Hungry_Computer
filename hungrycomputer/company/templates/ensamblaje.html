@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -24,46 +24,39 @@
     -->
     <nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="home.html">Hungry Computer</a>
+          <a class="navbar-brand" href="home">Hungry Computer</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="home.html">Inicio</a>
+                <a class="nav-link active" aria-current="page" href="home">Inicio</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: aliceblue;">
                   Departamentos
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="almacen.html">Almacen</a></li>
-                  <li><a class="dropdown-item" href="distribuicion.html">Distribución</a></li>
-                  <li><a class="dropdown-item" href="ensamblaje.html">Ensamblaje</a></li>
-                  <li><a class="dropdown-item" href="finanzas.html">Finanzas</a></li>
-                  <li><a class="dropdown-item" href="mercadoternia.html">Mercadotecnia</a></li>
-                  <li><a class="dropdown-item" href="recursos humanos.html">Recursos Humanos</a></li>
-                  <li><a class="dropdown-item" href="soporte.html">Soporte</a></li>
+                  <li><a class="dropdown-item" href="almacen">Almacen</a></li>
+                  <li><a class="dropdown-item" href="distribuicion">Distribución</a></li>
+                  <li><a class="dropdown-item" href="ensamblaje">Ensamblaje</a></li>
+                  <li><a class="dropdown-item" href="finanzas">Finanzas</a></li>
+                  <li><a class="dropdown-item" href="mercadoternia">Mercadotecnia</a></li>
+                  <li><a class="dropdown-item" href="recursos humanos">Recursos Humanos</a></li>
+                  <li><a class="dropdown-item" href="soporte">Soporte</a></li>
                   <!--<li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="#">Something else here</a></li>-->
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Contactanos</a>
+                <a class="nav-link active" aria-current="page" href="formulario_soporte">Contactanos</a>
               </li>
             </ul>
-            <form class="d-flex">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="">Usuario</a>
-                </li>
-              </ul>
-            </form>
           </div>
         </div>
       </nav>
-
+      
       <div class="container">
         <div class="row">
           <div class="col-md-12">
@@ -74,7 +67,7 @@
                   <li class="breadcrumb-item active" aria-current="page">Ensamblaje</li>
                 </ol>
               </nav>
-
+              
               <h1>Ensamblaje</h1>
               <hr>
             <table class="table">
@@ -90,13 +83,25 @@
                   {% for assembly_order in assembly_orders %}
                   <tr>
                     <th scope="row">{{assembly_order.id}}</th>
-                    <td>{{assembly_order.attendant}}</td>
+                    <td>{{assembly_order.attendant.first_name}}</td>
                     <td>{{assembly_order.finish_date}}</td>
                     <td>
-                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#ModalVer"><i class="fa fa-eye" aria-hidden="true"></i> | Ver</button>
+                      <div style="display: flex">
                         <button type="button" class="btn btn-warning"  data-bs-toggle="modal" data-bs-target="#ModalEditar"><i class="fa fa-pencil" aria-hidden="true"></i> | Editar</button>
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ModalEliminar"><i class="fa fa-trash" aria-hidden="true"></i> | Eliminar</button>
-                    </td>
+                        {% comment %} <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ModalEliminar"><i class="fa fa-trash" aria-hidden="true"></i> | Eliminar</button> {% endcomment %}
+                        <form
+                        style="margin-left: 5px"
+                        action="{% url 'delete_assembly_order' assembly_order.id %}"
+                        method="post"
+                      >
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">
+                          <i class="fa fa-trash" aria-hidden="true"></i> |
+                          Eliminar
+                        </button>
+                      </form>
+                    </div>
+                      </td>
                   </tr>
                   {% endfor %}
                 </tbody>
@@ -116,28 +121,28 @@
           <div class="modal-body">
             <div class="form-group">
                 <label for="exampleInputFolio">Folio</label>
-                <input  class="form-control" id="exampleInputFolio" aria-describedby="folioHelp" placeholder="Ingresar folio">
+                <input  class="form-control" id="exampleInputFolio" name="exampleInputFolio" aria-describedby="folioHelp" placeholder="Ingresar folio">
               </div>
               <div class="form-group">
                 <label for="exampleInputTitular">Titular</label>
-                <input  class="form-control" id="exampleInputTitular" placeholder="Ingresar titular del pedido">
+                <input  class="form-control" id="exampleInputTitular" name="exampleInputTitular" placeholder="Ingresar titular del pedido">
               </div>
                 <div class="form-group">
                 <label for="exampleInputFecha">Fecha</label>
-                <input type="date" class="form-control" id="exampleInputFecha" placeholder="Fecha del pedido">
+                <input type="date" class="form-control" id="exampleInputFecha" name="exampleInputFecha" placeholder="Fecha del pedido">
               </div>
                 <div class="form-group">
                 <label for="exampleInputDescripcion">Descripcion</label>
                 <br>
-                <textarea class="form-control" id="exampleFormDescripcionTextarea1" rows="3" placeholder="Descripcion de las piezas del pedido"></textarea>
+                <textarea class="form-control" id="exampleFormDescripcionTextarea1" name="exampleFormDescripcionTextarea1" rows="3" placeholder="Descripcion de las piezas del pedido"></textarea>
               </div>
                 <div class="form-group">
                 <label for="exampleInputNotas">Notas del ensamblador</label>
                 <br>
-                <textarea class="form-control" id="exampleFormNotasTextarea1" rows="3"></textarea>
+                <textarea class="form-control" id="exampleFormNotasTextarea1" name="exampleFormNotasTextarea1" rows="3"></textarea>
               </div>
           </div>
-
+        
           <div class="modal-footer">
             <button type="submit" class="btn btn-success">Agregar</button>
             <button type="reset"  class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -256,7 +261,7 @@
       </div>
 
 
-
+                    
 
 
 <br><br>
@@ -289,4 +294,4 @@
     <script src="../../../Documentos/js/popper.min.js"></script>
     <script src="../../../Documentos/js/bootstrap-4.3.1.js"></script>
   </body>
-</html> 
+</html>
